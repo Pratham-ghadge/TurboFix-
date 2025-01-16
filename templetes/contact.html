@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block body %}
+<style>
+    /* Contact Hero Section */
+    .contact-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                    url('{% static "images/contact-bg.jpg" %}') center/cover;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 40px;  /* Added space below hero */
+    }
+
+    /* Contact Form */
+    .contact-wrapper {
+        background: #1a1a1a;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+        height: 100%;  /* Ensure full height */
+    }
+
+    .contact-form {
+        padding: 40px;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: #ffd700;
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        color: white;
+    }
+
+    .form-label {
+        color: #ffd700;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+
+    .btn-submit {
+        background: #ffd700;
+        color: #000;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-submit:hover {
+        background: #ffed4a;
+        transform: translateY(-2px);
+    }
+
+    /* Info Cards */
+    .info-card {
+        background: #1a1a1a;
+        border-radius: 15px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        height: calc(35% - 24px);  /* Account for margin */
+        margin-bottom: 24px;
+        transition: all 0.3s ease;
+    }
+
+    .info-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 215, 0, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .info-icon i {
+        color: #ffd700;
+        font-size: 1.5rem;
+    }
+
+    /* Map Section */
+    .map-wrapper {
+        height: 400px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 80px 0;  /* Added proper spacing */
+    }
+
+    /* Social Links */
+    .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffd700;
+        text-decoration: none;  /* Remove underline */
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: #ffd700;
+        color: #000;
+        transform: translateY(-3px);
+    }
+
+    /* Success Message */
+    .success-message {
+        display: none;
+        background: rgba(40, 167, 69, 0.1);
+        border: 1px solid #28a745;
+        color: #28a745;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<!-- Contact Hero Section -->
+<section class="contact-hero">
+    <div class="container">
+        <h1 class="display-4 text-white mb-4">Get in Touch</h1>
+        <p class="lead text-white-50">We're here to answer any questions you may have</p>
+    </div>
+</section>
+
+<!-- Main Contact Section -->
+<section class="container">
+    <div class="row g-4">
+        <!-- Contact Form Column -->
+        <div class="col-lg-7">
+            <div class="contact-wrapper">
+                <div class="contact-form">
+                    <h2 class="mb-4" style="color: #ffd700">Send Us a Message</h2>
+                    
+                    <!-- Success Message -->
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Thank you for your message. We'll get back to you soon!
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form id="contactForm" method="POST" action="{% url 'contact' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <label for="message" class="form-label">Your Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-submit">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information Column -->
+        <div class="col-lg-5">
+            <!-- Address Card -->
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="h5 mb-3">Visit Our Office</h3>
+                <p class="text-muted mb-0">123 Luxury Drive</p>
+                <p class="text-muted">Beverly Hills, CA 90210</p>
+            </div>
+
+            <!-- Contact Card -->
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3 class="h5 mb-3">Contact Details</h3>
+                <p class="text-muted mb-2">
+                    <i class="fas fa-phone-alt me-2"></i>+1 (555) 123-4567
+                </p>
+                <p class="text-muted mb-2">
+                    <i class="fas fa-envelope me-2"></i>info@turbofixgarage.com
+                </p>
+                <p class="text-muted">
+                    <i class="fas fa-clock me-2"></i>Mon - Sat: 9:00 AM - 7:00 PM
+                </p>
+            </div>
+
+            <!-- Social Media Card -->
+            <div class="info-card mb-0">  <!-- Removed margin bottom from last card -->
+                <div class="info-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3 class="h5 mb-3">Follow Us</h3>
+                <p class="text-muted mb-3">Stay connected with us on social media</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+
+
+    {% comment %} <div class="map-wrapper">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26440.72384129847!2d-118.24906!3d34.0536909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos%20Angeles%2C%20CA!5e0!3m2!1sen!2sus!4v1625687261!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div> {% endcomment %}
+
+    <div class="map-wrapper">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609997303!2d72.74109945454007!3d19.0821978396506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce8035c018cb%3A0xc6b8e21b6a16e9d8!2sMumbai%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sus!4v1617042290981!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+    
+
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+    
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+    
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch('{% url "contact" %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+    
+                if (response.ok) {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    contactForm.reset();
+    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting the form. Please try again.');
+            }
+        });
+    
+        // Phone number formatting
+      /*  const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+            */
+        
+    });
+    </script>
+
+    
+{% endblock body %}
+
+
+

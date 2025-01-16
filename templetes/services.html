@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services{% endblock title %}
+
+{% block body %}
+<style>
+    /* Service Hero Section */
+    .service-hero {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+        margin-top: -76px; /* Adjust for navbar height */
+    }
+
+    .service-hero video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    .service-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
+
+    .service-hero-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Service Section Styling */
+    .service-section {
+        padding: 80px 0;
+        position: relative;
+    }
+
+    .service-section:nth-child(even) {
+        background: #0a0a0a;
+    }
+
+    .service-card-lg {
+        background: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .service-card-lg:hover {
+        transform: translateY(-10px);
+        border-color: #ffd700;
+    }
+
+    .service-image {
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .service-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .service-card-lg:hover .service-image img {
+        transform: scale(1.1);
+    }
+
+    .feature-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+        border-color: #ffd700;
+        transform: translateX(10px);
+    }
+
+    .feature-icon {
+        color: #ffd700;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Process Timeline */
+    .process-timeline {
+        position: relative;
+        padding: 2rem 0;
+    }
+
+    .timeline-item {
+        padding: 2rem;
+        position: relative;
+        background: #1a1a1a;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+        border-color: #ffd700;
+        transform: translateY(-5px);
+    }
+
+    .timeline-number {
+        background: #ffd700;
+        color: black;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(45deg, #000000, #1a1a1a);
+        padding: 80px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Custom Button Styles */
+    .btn-primary-custom {
+        background: #ffd700;
+        color: #000000;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary-custom:hover {
+        background: #ffed4a;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-custom {
+        border: 2px solid #ffd700;
+        color: #ffd700;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-custom:hover {
+        background: #ffd700;
+        color: #000000;
+    }
+
+    /* Animation Classes */
+    .animate-fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+
+    .animate-fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<!-- Service Hero Section -->
+<section class="service-hero">
+    <video autoplay muted loop class="position-absolute w-100 h-100 object-fit-cover">
+        <source src="{% static '/images/background.mp4' %}" type="video/mp4">
+    </video>
+    <div class="service-hero-overlay"></div>
+    <div class="service-hero-content">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">Our Premium Services</h1>
+            <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">Experience automotive excellence with our comprehensive range of services</p>
+            <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#purchase" class="btn btn-primary-custom me-3 mb-2">Explore Services</a>
+                <a href="/contact" class="btn btn-outline-custom mb-2">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Purchase New Car Section -->
+<section id="purchase" class="service-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <h2 class="mb-4" style="color: #ffd700">Purchase New Car</h2>
+                <p class="lead mb-4">Find your dream luxury vehicle with our expert guidance and premium selection.</p>
+                
+                <div class="feature-item">
+                    <i class="fas fa-check-circle feature-icon"></i>
+                    <h4>Extensive Luxury Collection</h4>
+                    <p class="text-muted mb-0">Access to the latest models from prestigious brands</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-handshake feature-icon"></i>
+                    <h4>Personalized Consultation</h4>
+                    <p class="text-muted mb-0">Expert advice tailored to your preferences and needs</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h4>Warranty Coverage</h4>
+                    <p class="text-muted mb-0">Comprehensive warranty and protection plans</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="service-card-lg">
+                    <div class="service-image">
+                        <img src="{% static '/images/card5.jpg' %}" alt="Luxury Car Purchase">
+                    </div>
+                    <div class="p-4 text-center">
+                        <a href="/contact" class="btn btn-primary-custom">Schedule Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Car Servicing Section -->
+<section id="service" class="service-section">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #ffd700">Professional Car Servicing</h2>
+        
+        <div class="process-timeline">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="timeline-item">
+                        <div class="timeline-number">1</div>
+                        <h4>Diagnostic Assessment</h4>
+                        <p class="text-muted">Comprehensive vehicle inspection using state-of-the-art equipment</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-number">2</div>
+                        <h4>Expert Service</h4>
+                        <p class="text-muted">Professional maintenance by certified technicians</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-number">3</div>
+                        <h4>Quality Check</h4>
+                        <p class="text-muted">Rigorous testing and verification of all work performed</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-number">4</div>
+                        <h4>Delivery</h4>
+                        <p class="text-muted">Detailed service report and vehicle handover</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Car Selling Section -->
+<section id="sell" class="service-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="service-card-lg">
+                    <div class="service-image">
+                        <img src="{% static '/images/card3.jpg' %}" alt="Car Selling">
+                    </div>
+                    <div class="p-4 text-center">
+                        <a href="/contact" class="btn btn-primary-custom">Get Valuation</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="mb-4" style="color: #ffd700">Car Selling Made Easy</h2>
+                <p class="lead mb-4">Get the best value for your luxury vehicle with our professional selling service.</p>
+                
+                <div class="feature-item">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h4>Market Analysis</h4>
+                    <p class="text-muted mb-0">Expert valuation based on current market trends</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-camera feature-icon"></i>
+                    <h4>Professional Presentation</h4>
+                    <p class="text-muted mb-0">High-quality photography and detailed vehicle documentation</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-handshake feature-icon"></i>
+                    <h4>Negotiation Support</h4>
+                    <p class="text-muted mb-0">Professional handling of all buyer interactions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section text-center">
+    <div class="container">
+        <h2 class="mb-4" style="color: #ffd700">Ready to Experience Premium Service?</h2>
+        <p class="lead mb-5">Contact us today to schedule an appointment or learn more about our services</p>
+        <a href="/contact" class="btn btn-primary-custom me-3">Contact Us</a>
+        <a href="tel:+1234567890" class="btn btn-outline-custom">Call Now</a>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.service-card-lg, .feature-item, .timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+});
+</script>
+{% endblock body %}

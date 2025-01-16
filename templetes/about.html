@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block body %}
+<style>
+    /* About Hero Section */
+    .about-hero {
+        background: linear-gradient(rgba(47, 46, 46, 0.7), rgba(57, 57, 57, 0.7)),
+                    url('{% static "images/about-bg.jpg" %}') center/cover;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Timeline styling */
+    .timeline {
+        position: relative;
+        padding: 60px 0;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        background: #ffd700;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+    }
+
+    .timeline-item {
+        margin-bottom: 60px;
+        position: relative;
+    }
+
+    .timeline-content {
+        position: relative;
+        background: #1a1a1a;
+        border-radius: 15px;
+        padding: 30px;
+        width: calc(50% - 40px);
+        transition: transform 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        transform: translateY(-5px);
+    }
+
+    .timeline-left {
+        left: 0;
+    }
+
+    .timeline-right {
+        left: 50%;
+        margin-left: 40px;
+    }
+
+    .timeline-dot {
+        width: 20px;
+        height: 20px;
+        background: #ffd700;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        top: 30px;
+        margin-left: -10px;
+    }
+
+    /* Team member cards */
+    .team-card {
+        background: #1a1a1a;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .team-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .team-img-wrapper {
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .team-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .team-card:hover .team-img-wrapper img {
+        transform: scale(1.1);
+    }
+
+    .team-info {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .expertise-card {
+        background: #1a1a1a;
+        border-radius: 15px;
+        padding: 30px;
+        height: 100%;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .expertise-card:hover {
+        border-color: #ffd700;
+        transform: translateY(-5px);
+    }
+
+    .expertise-icon {
+        font-size: 2.5rem;
+        color: #ffd700;
+        margin-bottom: 20px;
+    }
+</style>
+
+<!-- About Hero Section -->
+<section class="about-hero">
+    <div class="container">
+        <h1 class="display-3 text-white mb-4">Our Legacy of Excellence</h1>
+        <p class="lead text-white-50">Crafting automotive perfection since 2009</p>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="mb-4" style="color: #ffd700">Our Story</h2>
+                <p class="lead mb-4">Founded in 2009, TurboFix has become synonymous with automotive excellence and unparalleled service in the luxury car industry.</p>
+                <p class="text-muted">What started as a premium car service center has evolved into a comprehensive automotive hub, offering sales of exclusive vehicles, expert maintenance, and custom modifications. Our commitment to perfection and customer satisfaction has earned us the trust of car enthusiasts and luxury vehicle owners worldwide.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/about-bg1.jpg' %}" alt="Our Story" class="img-fluid rounded-3 shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="timeline">
+    <div class="container">
+        <div class="timeline-item">
+            <div class="timeline-content timeline-left">
+                <h3 style="color: #ffd700">2009</h3>
+                <p>Founded as a premium car service center</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content timeline-right">
+                <h3 style="color: #ffd700">2012</h3>
+                <p>Expanded to luxury car sales</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content timeline-left">
+                <h3 style="color: #ffd700">2015</h3>
+                <p>Introduced custom modification services</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content timeline-right">
+                <h3 style="color: #ffd700">2024</h3>
+                <p>Celebrating 15 years of excellence</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Expertise Section -->
+<section class="py-5" style="background: #0a0a0a;">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #ffd700">Our Expertise</h2>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="expertise-card">
+                    <i class="fas fa-shield-alt expertise-icon"></i>
+                    <h3 class="h4 mb-3">Certified Excellence</h3>
+                    <p class="text-muted">Our team of certified technicians ensures the highest standards of service and maintenance.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="expertise-card">
+                    <i class="fas fa-tools expertise-icon"></i>
+                    <h3 class="h4 mb-3">State-of-the-Art Equipment</h3>
+                    <p class="text-muted">Using the latest diagnostic and repair equipment for precise service delivery.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="expertise-card">
+                    <i class="fas fa-handshake expertise-icon"></i>
+                    <h3 class="h4 mb-3">Customer First</h3>
+                    <p class="text-muted">Dedicated to providing exceptional customer service and building lasting relationships.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #ffd700">Our Leadership Team</h2>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team1.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="h5 mb-2">Michael Anderson</h3>
+                        <p class="text-muted mb-3">CEO & Founder</p>
+                        <div class="social-links">
+                            <a href="#" class="text-muted me-3"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team2.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="h5 mb-2">Sarah Martinez</h3>
+                        <p class="text-muted mb-3">Head of Operations</p>
+                        <div class="social-links">
+                            <a href="#" class="text-muted me-3"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team4.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="h5 mb-2">David Chen</h3>
+                        <p class="text-muted mb-3">Technical Director</p>
+                        <div class="social-links">
+                            <a href="#" class="text-muted me-3"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}
