@@ -2,10 +2,10 @@
 
 echo "BUILD START"
 
-# Install Python dependencies
-python3.9 -m pip install -r requirements.txt
+# Install dependencies
+pip install -r requirements.txt
 
 # Collect static files
-python3.9 manage.py collectstatic --noinput --clear
+python3 manage.py collectstatic --noinput
 
 echo "BUILD END"
