@@ -1,1 +1,0 @@
-here is my txt file and its static filr here we can store afile which we want to show on our website 
